@@ -2,8 +2,21 @@ import React from "react";
 import MyImage from "../../assets/side_img.jpg";
 
 const Login = () => {
+  const [loginData, setLoginData] = React.useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  function handleInputChange(event) {
+    setLoginData({
+      ...loginData,
+      [event.target.name]: event.target.value,
+    });
+  }
+
   return (
-    <div className="flex">
+    <div className="flex ">
       <div id="images" className=" w-1/2 h-[100vh] ">
         <img src={MyImage} alt="icons" />
       </div>
@@ -34,6 +47,8 @@ const Login = () => {
             minLength="3"
             maxLength="30"
             title="Only letters, numbers or dash"
+            name="username"
+            onChange={handleInputChange}
           />
         </label>
         <p className="validator-hint hidden">
@@ -67,6 +82,8 @@ const Login = () => {
             minlength="8"
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
             title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
+            name="password "
+            onchange={handleInputChange} // (e) => setPassword(...prev, e.target.value)
           />
         </label>
         <p className="validator-hint hidden">
@@ -77,6 +94,12 @@ const Login = () => {
           At least one uppercase letter
         </p>
         <button className="btn btn-primary">Log in</button>
+        <div className="flex">
+          <p>Don't have an account? &nbsp; </p>
+          <a href="/signup" className="text-blue-500 hover:underline">
+            Sign up
+          </a>
+        </div>
       </div>
     </div>
   );
